@@ -27,6 +27,7 @@ dependencies:
   flutter_swiper : ^1.1.5
   flutter_screenutil: ^1.0.2
   url_launcher: ^5.0.1
+  flutter_easyrefresh: ^2.1.0
 
   
 dev_dependencies: #  上线的时候不会一起打包

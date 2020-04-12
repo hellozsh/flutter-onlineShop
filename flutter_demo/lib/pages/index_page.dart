@@ -10,10 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IndexPage extends StatefulWidget {
 
-   _IndexPageState createState() => _IndexPageState();
+  _IndexPageState createState() => _IndexPageState();
 }
 
 class _IndexPageState extends State<IndexPage> {
+
+  PageController _pageController;
 
   final List<BottomNavigationBarItem> bottomTabs = [
 
@@ -35,7 +37,7 @@ class _IndexPageState extends State<IndexPage> {
     )
   ];
 
-  final List tabBodies = [
+  final List<Widget> tabBodies = [
     HomePage(),
     CategoryPage(),
     CartPage(),
@@ -49,6 +51,14 @@ class _IndexPageState extends State<IndexPage> {
   void initState() {
 
     currentPage = tabBodies[currentIndex];
+    _pageController = PageController()
+    ..addListener((){
+      if(currentPage != _pageController.page.round()) {
+        setState(() {
+          currentPage = _pageController.page.round();
+        });
+      }
+    });
     super.initState();
   }
   
@@ -70,8 +80,10 @@ class _IndexPageState extends State<IndexPage> {
           });
         },
       ),
-      body: currentPage
-      
+      body: IndexedStack(
+        index: currentIndex,
+        children: tabBodies,
+      )
     );
   }
 }

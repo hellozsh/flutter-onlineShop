@@ -3,22 +3,22 @@ const cookie = 'is_wx_new=1; mc_loguser_area=6175; mc_loguser_channel=default; m
 
 const httpHeaders = {
 
-  'Accept': '*/*',
-  'Mc-Gray': 'cityId=1_saleArea=6175_companyId=49471295',
-  'Accept-Language': 'zh-Hans-CN;q=1, en-CN;q=0.9',
-  'Accept-Encoding': 'br, gzip, deflate',
-  'Content-Type': 'application/json',
-  'X-MC-City': '1',
-  "Content-Lenght" : "1286",
-  'User-Agent': 'MeicaiStore/2.16.0 (iPhone; iOS 12.1; Scale/3.00)',
-  'Connection': 'keep-alive',
-  'Cookie': cookie,
-  'X-MC-Area': '6175',
-  'Host': 'mallapi.yunshanmeicai.com'
+//  'Accept': '*/*',
+//  'Mc-Gray': 'cityId=1_saleArea=6175_companyId=49471295',
+//  'Accept-Language': 'zh-Hans-CN;q=1, en-CN;q=0.9',
+//  'Accept-Encoding': 'br, gzip, deflate',
+//  'Content-Type': 'application/json',
+//  'X-MC-City': '1',
+//  "Content-Lenght" : "1286",
+//  'User-Agent': 'MeicaiStore/2.16.0 (iPhone; iOS 12.1; Scale/3.00)',
+//  'Connection': 'keep-alive',
+  'Cookie': cookie
+//  'X-MC-Area': '6175',
+//  'Host': 'mallapi.yunshanmeicai.com'
 };
 
 
-const homePagePar = {
+var homePagePar = {
 
   "salt_sign": "88328F68C2442F0D11C29BE08933284A,91,1586505526767",
   "_ENV_": homePageENV,
