@@ -7,6 +7,8 @@ import 'dart:convert';
 import '../model/category.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './categoryPage/RightCategoryNav.dart';
+import 'package:provide/provide.dart';
+import '../provide/child_category.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -46,6 +48,7 @@ class LeftCategoryNav extends StatefulWidget {
 class _leftCategoryNavState extends State<LeftCategoryNav> {
 
   List<CategoryPageTitle> list = [];
+  var choseListIndex = 0;
 
   @override
   void initState() {
@@ -77,7 +80,7 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
 
   void _getCategory() async {
 
-    homePagePar['parent_id'] = "1"; // 0
+    homePagePar['parent_id'] = "0"; // 0
     await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
@@ -85,18 +88,38 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
       setState(() {
         list = pageTitleList.list;
       });
+      _setChildCategory(list[choseListIndex].id);
 //      list.list.forEach((item) => print('zhousuhua ===== '+item.name.toString()));
     });
   }
 
+  void _setChildCategory(String id) async {
+
+    homePagePar['parent_id'] = id; // 0
+    await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
+      var data = json.decode(val.toString());
+      CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
+      Provide.value<ChildCategory>(context).getChildCategory(pageTitleList.list);
+    });
+  }
+
   Widget _leftInkWell(int index) {
+
+    bool isClick = false;
+    isClick = (index == choseListIndex) ? true : false;
     return InkWell(
-      onTap: (){},
+      onTap: (){
+
+        setState(() {
+          choseListIndex = index;
+        });
+        _setChildCategory(list[index].id);
+      },
       child: Container(
         height: ScreenUtil().setHeight(100),
         padding: EdgeInsets.only(left: 10, top: 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isClick?Color.fromRGBO(236, 238, 239, 1.0):Colors.white,
           border: Border(
             bottom: BorderSide(
               width: 1,

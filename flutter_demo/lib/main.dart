@@ -2,6 +2,7 @@ import 'package:flutter/material.dart'; // UiKit
 import './pages/index_page.dart';
 
 import './pages/simpProvide/counter.dart';
+import './provide/child_category.dart';
 import 'package:provide/provide.dart';
 
 // Widget（小部件）
@@ -17,10 +18,14 @@ import 'package:provide/provide.dart';
 void main() {
 
   var counter = Counter();
-  var prviders = Providers();
-  prviders..provide(Provider<Counter>.value(counter));
-  runApp(ProviderNode(child: MyApp(), providers: prviders));
+  var childCategory = ChildCategory();
 
+  var prviders = Providers();
+  prviders
+    ..provide(Provider<Counter>.value(counter))
+    ..provide(Provider<ChildCategory>.value(childCategory));
+
+  runApp(ProviderNode(child: MyApp(), providers: prviders));
 }
 class MyApp extends StatelessWidget {
 
