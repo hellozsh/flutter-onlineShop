@@ -9,9 +9,9 @@ class CategoryPageTitle {
 
   factory CategoryPageTitle.fromJson(dynamic json) {
     return CategoryPageTitle(
-        id : json['id'],
+        id : json['id'].toString(),
         name : json['name'],
-        parentId : json['parent_id'],
+        parentId : json['parent_id'].toString()
     );
   }
 }

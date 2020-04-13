@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart'; // UiKit
 import './pages/index_page.dart';
 
+import './pages/simpProvide/counter.dart';
+import 'package:provide/provide.dart';
+
 // Widget（小部件）
 // 有状态的 stateful
 // 无状态   stateless
@@ -8,15 +11,17 @@ import './pages/index_page.dart';
 
 
 // 如果只有一行代码可以这么写
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
 // 多行代码写法
-//void main() {
-//
-//  runApp(
-//    MyWidget()
-//  );
-//}
+void main() {
+
+  var counter = Counter();
+  var prviders = Providers();
+  prviders..provide(Provider<Counter>.value(counter));
+  runApp(ProviderNode(child: MyApp(), providers: prviders));
+
+}
 class MyApp extends StatelessWidget {
 
   @override

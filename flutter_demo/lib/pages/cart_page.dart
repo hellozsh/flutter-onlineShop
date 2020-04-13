@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './simpProvide/CartNumPage.dart';
 
 class CartPage extends StatelessWidget {
 
@@ -8,7 +9,7 @@ class CartPage extends StatelessWidget {
     return Container(
       child: Scaffold(
         body: Center(
-          child: Text("购物车页面"),
+          child: CartNumPage(),
         ),
       ),
     );
