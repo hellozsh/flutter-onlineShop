@@ -17,7 +17,6 @@ const httpHeaders = {
 //  'Host': 'mallapi.yunshanmeicai.com'
 };
 
-
 var homePagePar = {
 
   "salt_sign": "88328F68C2442F0D11C29BE08933284A,91,1586505526767",

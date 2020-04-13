@@ -35,9 +35,10 @@ class _CategoryPageState extends State<CategoryPage> {
       ),
     );
   }
-  
-
 }
+
+//categoryId=2c9f6c946cd22d7b016cd74220b70040&categorySubId=2c9f6c946cd22d7b016cd7426d700041&page=1
+
 
 // 左侧导航菜单
 class LeftCategoryNav extends StatefulWidget {
