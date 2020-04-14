@@ -3,6 +3,7 @@ import './pages/index_page.dart';
 
 import './pages/simpProvide/counter.dart';
 import './provide/child_category.dart';
+import './provide/category_goods_list.dart';
 import 'package:provide/provide.dart';
 
 // Widget（小部件）
@@ -19,11 +20,13 @@ void main() {
 
   var counter = Counter();
   var childCategory = ChildCategory();
+  var categoryGoodListProvide = CategoryGoodsListProvide();
 
   var prviders = Providers();
   prviders
     ..provide(Provider<Counter>.value(counter))
-    ..provide(Provider<ChildCategory>.value(childCategory));
+    ..provide(Provider<ChildCategory>.value(childCategory))
+    ..provide(Provider<CategoryGoodsListProvide>.value(categoryGoodListProvide));
 
   runApp(ProviderNode(child: MyApp(), providers: prviders));
 }

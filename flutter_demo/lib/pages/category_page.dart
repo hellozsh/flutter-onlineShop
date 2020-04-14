@@ -10,6 +10,10 @@ import './categoryPage/RightCategoryNav.dart';
 import 'package:provide/provide.dart';
 import '../provide/child_category.dart';
 import './categoryPage/CategoryGoodsList.dart';
+import 'package:flutter_demo/model/categoryGoodsListModel.dart';
+
+
+import '../provide/category_goods_list.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -40,8 +44,6 @@ class _CategoryPageState extends State<CategoryPage> {
 }
 
 
-
-
 // 左侧导航菜单
 class LeftCategoryNav extends StatefulWidget {
 
@@ -52,6 +54,15 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
 
   List<CategoryPageTitle> list = [];
   var choseListIndex = 0;
+
+  final List<String> categoryIdS = [
+    "2c9f6c946cd22d7b016cd74220b70040",
+    "2c9f6c946cd22d7b016cd732f0f6002f",
+    "2c9f6c946cd22d7b016cd747e4bb0046",
+    "2c9f6c946449ea7e01647ccfddb3001e",
+    "2c9f6c94708ed2340170be2761951014"
+  ];
+  var choseCategoryIndex = 0;
 
   @override
   void initState() {
@@ -103,6 +114,28 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
       Provide.value<ChildCategory>(context).getChildCategory(pageTitleList.list);
+
+      // 修改商品列表数组
+      choseCategoryIndex ++;
+      if(choseCategoryIndex >= categoryIdS.length) {
+        choseCategoryIndex = 0;
+      }
+      _getGoodList(categoryIdS[choseCategoryIndex]);
+    });
+  }
+
+  void _getGoodList(String categoryId) async {
+    var data = {
+      'categoryId': categoryId == null ? '2c9f6c946cd22d7b016cd74220b70040': categoryId,
+      'categorySubId': '',
+      'page': 1
+    };
+    await postRequest('getMallGoods', formData: data).then((val){
+
+      var responData = json.decode(val.toString());
+      print('zhousuhua --- 商品列表'+responData.toString());
+      CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(responData);
+      Provide.value<CategoryGoodsListProvide>(context).getGoodsList(goodsList.data);
     });
   }
 
@@ -112,7 +145,6 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
     isClick = (index == choseListIndex) ? true : false;
     return InkWell(
       onTap: (){
-
         setState(() {
           choseListIndex = index;
         });
