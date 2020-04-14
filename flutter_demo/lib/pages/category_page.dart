@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './categoryPage/RightCategoryNav.dart';
 import 'package:provide/provide.dart';
 import '../provide/child_category.dart';
+import './categoryPage/CategoryGoodsList.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -17,10 +18,10 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     return Container(
       padding: EdgeInsets.only(top: 30),
       child: Row(
@@ -28,7 +29,8 @@ class _CategoryPageState extends State<CategoryPage> {
           LeftCategoryNav(),
           Column(
             children: <Widget>[
-              RightCategoryNav()
+              RightCategoryNav(),
+              CategoryGoodsList(),
             ],
           )
         ],
@@ -37,7 +39,7 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 }
 
-//categoryId=2c9f6c946cd22d7b016cd74220b70040&categorySubId=2c9f6c946cd22d7b016cd7426d700041&page=1
+
 
 
 // 左侧导航菜单

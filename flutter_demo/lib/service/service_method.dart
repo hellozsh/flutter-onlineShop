@@ -12,7 +12,6 @@ import 'package:flutter_demo/model/ResponseEntity.dart';
 // 大括号包起来是可选参数
 Future postRequest(url, {formData}) async {
   try{
-    print('开始获取首页数据......');
     Response response;
     Dio dio = new Dio();
     dio.options.headers = httpHeaders;
