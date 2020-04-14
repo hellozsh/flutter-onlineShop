@@ -29,6 +29,8 @@ dependencies:
   url_launcher        : ^5.0.1
   flutter_easyrefresh : ^2.1.0
   provide             : ^1.0.2
+  provider            : ^4.0.5
+
 
   
 dev_dependencies: #  上线的时候不会一起打包

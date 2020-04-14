@@ -6,6 +6,8 @@ import './provide/child_category.dart';
 import './provide/category_goods_list.dart';
 import 'package:provide/provide.dart';
 
+import 'package:flutter_demo/provider/providerUse.dart';
+
 // Widget（小部件）
 // 有状态的 stateful
 // 无状态   stateless
@@ -13,7 +15,10 @@ import 'package:provide/provide.dart';
 
 
 // 如果只有一行代码可以这么写
-//void main() => runApp(MyApp());
+void main() => runApp(providerApp());
+
+
+/*
 
 // 多行代码写法
 void main() {
@@ -47,6 +52,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+*/
 
 class MyWidget extends StatelessWidget {
 
