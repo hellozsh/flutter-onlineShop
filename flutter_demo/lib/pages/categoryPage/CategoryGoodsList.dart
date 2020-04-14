@@ -25,16 +25,22 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
     return Provide<CategoryGoodsListProvide>(
 
       builder: (context, child, data){
-        return Container(
-          width: ScreenUtil().setWidth(570),
-          height: ScreenUtil().setHeight(1000),
-          child: ListView.builder(
-            itemCount: data.goodList.length,
-            itemBuilder: (context, index){
-              return _ListWidget(data.goodList,index);
-            },
-          ),
-        );
+        if(data.goodList.length > 0) {
+          return Expanded(
+              child: Container(
+                width: ScreenUtil().setWidth(570),
+                height: ScreenUtil().setHeight(1000),
+                child: ListView.builder(
+                  itemCount: data.goodList.length,
+                  itemBuilder: (context, index){
+                    return _ListWidget(data.goodList,index);
+                  },
+                ),
+              )
+          );
+        } else {
+          return Text('暂时没有数据');
+        }
       }
     );
   }

@@ -95,7 +95,7 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
   void _getCategory() async {
 
     homePagePar['parent_id'] = "0"; // 0
-    await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
+    postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
 
@@ -110,7 +110,7 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
   void _setChildCategory(String id) async {
 
     homePagePar['parent_id'] = id; // 0
-    await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
+    postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
       Provide.value<ChildCategory>(context).getChildCategory(pageTitleList.list);
@@ -130,12 +130,15 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
       'categorySubId': '',
       'page': 1
     };
-    await postRequest('getMallGoods', formData: data).then((val){
+    postRequest('getMallGoods', formData: data).then((val){
 
       var responData = json.decode(val.toString());
-      print('zhousuhua --- 商品列表'+responData.toString());
       CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(responData);
-      Provide.value<CategoryGoodsListProvide>(context).getGoodsList(goodsList.data);
+      if(goodsList.data == null) {
+        Provide.value<CategoryGoodsListProvide>(context).getGoodsList([]);
+      } else {
+        Provide.value<CategoryGoodsListProvide>(context).getGoodsList(goodsList.data);
+      }
     });
   }
 
