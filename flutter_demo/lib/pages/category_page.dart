@@ -12,8 +12,8 @@ import './categoryPage/CategoryGoodsList.dart';
 import 'package:flutter_demo/model/categoryGoodsListModel.dart';
 import '../provide/category_goods_list.dart';
 
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-
+import 'package:fluro/fluro.dart';
+import '../pages/category_detail_page.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -22,6 +22,8 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
 
+
+  final router = Router();
 
   @override
   Widget build(BuildContext context) {

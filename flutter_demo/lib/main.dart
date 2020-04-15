@@ -8,6 +8,10 @@ import 'package:provide/provide.dart';
 
 import 'package:flutter_demo/provider/providerUse.dart';
 
+import './routers/routes.dart';
+import './routers/application.dart';
+import 'package:fluro/fluro.dart';
+
 // Widget（小部件）
 // 有状态的 stateful
 // 无状态   stateless
@@ -39,11 +43,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+
     // TODO: implement build
     return Container(
       child: MaterialApp(
         title: '百姓生活+',
         debugShowCheckedModeBanner: false,
+        //----------------router主要代码start
+        onGenerateRoute: Application.router.generator,
+        //----------------router主要代码end
         theme: ThemeData(
           primaryColor: Colors.pink
         ),
