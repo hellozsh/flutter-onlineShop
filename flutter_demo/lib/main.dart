@@ -15,10 +15,10 @@ import 'package:flutter_demo/provider/providerUse.dart';
 
 
 // 如果只有一行代码可以这么写
-void main() => runApp(providerApp());
+//void main() => runApp(providerApp());
 
 
-/*
+
 
 // 多行代码写法
 void main() {
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-*/
+
 
 class MyWidget extends StatelessWidget {
 

@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/config/HttpHeader.dart';
 import '../service/service_method.dart';
-import '../config/service_url.dart';
 import 'dart:convert';
 import '../model/category.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +10,10 @@ import 'package:provide/provide.dart';
 import '../provide/child_category.dart';
 import './categoryPage/CategoryGoodsList.dart';
 import 'package:flutter_demo/model/categoryGoodsListModel.dart';
-
-
 import '../provide/category_goods_list.dart';
+
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+
 
 class CategoryPage extends StatefulWidget {
 
@@ -95,7 +95,7 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
   void _getCategory() async {
 
     homePagePar['parent_id'] = "0"; // 0
-    postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
+    await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
 
@@ -110,7 +110,7 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
   void _setChildCategory(String id) async {
 
     homePagePar['parent_id'] = id; // 0
-    postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
+    await postRequest('categoryPageTopTitle', formData: homePagePar).then((val){
       var data = json.decode(val.toString());
       CategoryPageTitleList pageTitleList = CategoryPageTitleList.formJson(data['data']['list']);
       Provide.value<ChildCategory>(context).getChildCategory(pageTitleList.list);
@@ -130,9 +130,11 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
       'categorySubId': '',
       'page': 1
     };
-    postRequest('getMallGoods', formData: data).then((val){
+    print("zhousuhua ===="+data.toString());
+    await postRequest('getMallGoods', formData: data).then((val){
 
       var responData = json.decode(val.toString());
+      print("zhousuhua ===="+responData.toString());
       CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(responData);
       if(goodsList.data == null) {
         Provide.value<CategoryGoodsListProvide>(context).getGoodsList([]);

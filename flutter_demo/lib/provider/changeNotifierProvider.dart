@@ -1,5 +1,4 @@
-import 'package:provider/provider.dart';
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class CounterProvider with ChangeNotifier {
@@ -17,4 +16,5 @@ class CounterProvider with ChangeNotifier {
     // TODO: implement dispose
     super.dispose();
   }
+
 }

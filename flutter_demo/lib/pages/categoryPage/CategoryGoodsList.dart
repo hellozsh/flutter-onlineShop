@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_demo/model/categoryGoodsListModel.dart';
 import 'package:flutter_demo/provide/category_goods_list.dart';
 import 'package:provide/provide.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_demo/provide/child_category.dart';
 
 class CategoryGoodsList extends StatefulWidget {
 
@@ -29,11 +31,25 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
           return Expanded(
               child: Container(
                 width: ScreenUtil().setWidth(570),
-                height: ScreenUtil().setHeight(1000),
-                child: ListView.builder(
-                  itemCount: data.goodList.length,
-                  itemBuilder: (context, index){
-                    return _ListWidget(data.goodList,index);
+                child: EasyRefresh(
+                  footer: ClassicalFooter(
+                    key: Key("加载更多"),
+                    bgColor: Colors.white,
+                    textColor: Colors.pink,
+                    infoColor: Colors.pink,
+                    showInfo: true,
+                    noMoreText: Provide.value<ChildCategory>(context).noMoreText,
+                    infoText: "加载中",
+                    loadedText: '上啦加载'
+                  ),
+                  child: ListView.builder(
+                    itemCount: data.goodList.length,
+                    itemBuilder: (context, index){
+                      return _ListWidget(data.goodList,index);
+                    },
+                  ),
+                  onLoad: ()async{
+                    print("没有更多了");
                   },
                 ),
               )
