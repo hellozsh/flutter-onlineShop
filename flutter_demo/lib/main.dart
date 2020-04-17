@@ -4,13 +4,15 @@ import './pages/index_page.dart';
 import './pages/simpProvide/counter.dart';
 import './provide/child_category.dart';
 import './provide/category_goods_list.dart';
-import 'package:provide/provide.dart';
+import 'package:provide/provide.dart' as oldProvide;
 
 import 'package:flutter_demo/provider/providerUse.dart';
 
 import './routers/routes.dart';
 import './routers/application.dart';
 import 'package:fluro/fluro.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_demo/provider/category_detail_info.dart';
 
 // Widget（小部件）
 // 有状态的 stateful
@@ -31,13 +33,22 @@ void main() {
   var childCategory = ChildCategory();
   var categoryGoodListProvide = CategoryGoodsListProvide();
 
-  var prviders = Providers();
+  var prviders = oldProvide.Providers();
   prviders
-    ..provide(Provider<Counter>.value(counter))
-    ..provide(Provider<ChildCategory>.value(childCategory))
-    ..provide(Provider<CategoryGoodsListProvide>.value(categoryGoodListProvide));
+    ..provide(oldProvide.Provider<Counter>.value(counter))
+    ..provide(oldProvide.Provider<ChildCategory>.value(childCategory))
+    ..provide(oldProvide.Provider<CategoryGoodsListProvide>.value(categoryGoodListProvide));
 
-  runApp(ProviderNode(child: MyApp(), providers: prviders));
+  runApp(oldProvide.ProviderNode(
+      child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<DetailsInfoProvide>(create: (_)=>DetailsInfoProvide())
+          ],
+          child: MyApp(),
+      ),
+      providers: prviders)
+  );
+
 }
 class MyApp extends StatelessWidget {
 
