@@ -14,6 +14,8 @@ import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_demo/provider/category_detail_info.dart';
 
+import 'package:flutter_demo/provider/cart.dart';
+
 // Widget（小部件）
 // 有状态的 stateful
 // 无状态   stateless
@@ -42,7 +44,8 @@ void main() {
   runApp(oldProvide.ProviderNode(
       child: MultiProvider(
           providers: [
-            ChangeNotifierProvider<DetailsInfoProvide>(create: (_)=>DetailsInfoProvide())
+            ChangeNotifierProvider<CartProvider>(create: (_)=>CartProvider()),
+            ChangeNotifierProvider<DetailsInfoProvide>(create: (_)=>DetailsInfoProvide()),
           ],
           child: MyApp(),
       ),

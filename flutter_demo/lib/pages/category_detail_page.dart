@@ -5,6 +5,7 @@ import 'package:flutter_demo/pages/detail_page/detail_explain.dart';
 import 'package:flutter_demo/pages/detail_page/detail_top_area.dart';
 import 'package:flutter_demo/pages/detail_page/details_tabbar.dart';
 import 'package:flutter_demo/pages/detail_page/details_web.dart';
+import 'package:flutter_demo/pages/detail_page/detail_bottom.dart';
 
 class DetailPage extends StatelessWidget {
   
@@ -30,16 +31,23 @@ class DetailPage extends StatelessWidget {
           future: _getBackInfo(context),
           builder: (context, snapshot){
             if(snapshot.hasData){
-              return Container(
-                child: ListView(
-                  children: <Widget>[
+              return Stack(
+                children: <Widget>[
+                  ListView(
+                    children: <Widget>[
 
-                    DetailTopArea(),
-                    DetailsExplain(),
-                    DetailTabBar(),
-                    DetailWeb(),
-                  ],
-                ),
+                      DetailTopArea(),
+                      DetailsExplain(),
+                      DetailTabBar(),
+                      DetailWeb(),
+                    ],
+                  ),
+                  Positioned(
+                    child: DetailBottom(),
+                    bottom: 0,
+                    left: 0,
+                  )
+                ],
               );
             }else{
               return Text("记载中.....");
