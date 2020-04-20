@@ -2,24 +2,65 @@ import 'package:flutter/material.dart';
 import './simpProvide/CartNumPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_demo/provider/cart.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_demo/pages/cart_page/cart_bottom.dart';
+import 'package:flutter_demo/pages/cart_page/cart_item.dart';
 
 class CartPage extends StatelessWidget {
 
+
   @override
   Widget build(BuildContext context) {
+
+    _getCartInfo(context);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('购物车'),
       ),
-      body: FutureBuilder(
-          builder: (context, snapshot){
 
+      body:Consumer<CartProvider> (
+
+          builder: (BuildContext context, CartProvider cartInfo, Widget child){
+
+            if(cartInfo.cartList != null){
+
+              return Stack(
+
+                children: <Widget>[
+                  ListView.builder(
+                    itemCount: cartInfo.cartList.length,
+                    itemBuilder: (context, index){
+                      return CartItem(cartInfo.cartList[index]);
+                    },
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      left: 0,
+                      child: CartBottom()
+                  )
+                ],
+              );
+
+            }else{
+              return Text('增在加载');
+            }
           },
       ),
     );
   }
+
+  Future<String> _getCartInfo(BuildContext context) async {
+
+    print('zhousuhua ===== cartList====');
+    await Provider.of<CartProvider>(context, listen: false).getCartInfo();
+    return 'end';
+  }
+
 }
+
 
 
 // 持久化示范

@@ -13,7 +13,7 @@ class DetailWeb extends StatelessWidget {
     return Consumer<DetailsInfoProvide>(
         builder: (BuildContext context, DetailsInfoProvide detailInfo, Widget child) {
 
-          if(detailInfo.isLeft){
+          if(detailInfo.isLeft && detailInfo.goodsInfo != null){
             return Container(
               child: Html(
                   data: """${detailInfo.goodsInfo.data.goodInfo.goodsDetail}"""

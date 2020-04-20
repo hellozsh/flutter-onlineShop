@@ -69,7 +69,7 @@ class GoodInfo {
   String image1;
   String image2;
   String goodsSerialNumber;
-  int oriPrice;
+  double oriPrice;
   double presentPrice;
   String comPic;
   int state;

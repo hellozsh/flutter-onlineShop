@@ -31,6 +31,7 @@ class DetailPage extends StatelessWidget {
           future: _getBackInfo(context),
           builder: (context, snapshot){
             if(snapshot.hasData){
+
               return Stack(
                 children: <Widget>[
                   ListView(
