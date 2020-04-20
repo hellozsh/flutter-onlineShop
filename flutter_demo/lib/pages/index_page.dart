@@ -7,15 +7,10 @@ import 'member_page.dart';
 import 'category_page.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_demo/provider/currentIndex.dart';
 
-class IndexPage extends StatefulWidget {
-
-  _IndexPageState createState() => _IndexPageState();
-}
-
-class _IndexPageState extends State<IndexPage> {
-
-  PageController _pageController;
+class IndexPage extends StatelessWidget {
 
   final List<BottomNavigationBarItem> bottomTabs = [
 
@@ -44,46 +39,52 @@ class _IndexPageState extends State<IndexPage> {
     MemberPage()
   ];
 
-  int currentIndex = 0;
-  var currentPage;
+//  int currentIndex = 0;
+//  var currentPage;
 
-  @override
-  void initState() {
-
-    currentPage = tabBodies[currentIndex];
-    _pageController = PageController()
-    ..addListener((){
-      if(currentPage != _pageController.page.round()) {
-        setState(() {
-          currentPage = _pageController.page.round();
-        });
-      }
-    });
-    super.initState();
-  }
+//  @override
+//  void initState() {
+//
+//    currentPage = tabBodies[currentIndex];
+//    _pageController = PageController()
+//    ..addListener((){
+//      if(currentPage != _pageController.page.round()) {
+//        setState(() {
+//          currentPage = _pageController.page.round();
+//        });
+//      }
+//    });
+//    super.initState();
+//  }
   
   @override
   Widget build(BuildContext context) {
 
     ScreenUtil.init(context, width: 750, height: 1334);
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        items: bottomTabs,
-        onTap: (index){
-          setState(() {
-            currentIndex = index;
-            currentPage = tabBodies[currentIndex];
-          });
-        },
-      ),
-      body: IndexedStack(
-        index: currentIndex,
-        children: tabBodies,
-      )
+    return Consumer<CurrentIndexProvide>(
+      builder: (BuildContext con, CurrentIndexProvide provider, Widget child){
+
+        return Scaffold(
+            backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: provider.currentIndex,
+              items: bottomTabs,
+              onTap: (index){
+//                setState(() {
+//                  currentIndex = index;
+//                  currentPage = tabBodies[currentIndex];
+//                });
+               Provider.of<CurrentIndexProvide>(context, listen: false).changeIndex(index);
+              },
+            ),
+            body: IndexedStack(
+              index: provider.currentIndex,
+              children: tabBodies,
+            )
+        );
+      }
     );
   }
 }

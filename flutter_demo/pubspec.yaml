@@ -33,6 +33,7 @@ dependencies:
   fluro               : ^1.6.3
   flutter_html        : ^0.11.1
   shared_preferences  : ^0.5.6
+  fluttertoast        : ^4.0.0
 
 
   

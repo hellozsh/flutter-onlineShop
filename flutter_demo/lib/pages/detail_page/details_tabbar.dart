@@ -12,7 +12,6 @@ class DetailTabBar extends StatelessWidget {
       child: Consumer<DetailsInfoProvide>(
         builder: (BuildContext context, DetailsInfoProvide detailInfo, Widget child) {
 
-            print("zhousuhua ===== builder: ");
             return Container(
               margin: EdgeInsets.only(top: 15.0),
               child: Column(

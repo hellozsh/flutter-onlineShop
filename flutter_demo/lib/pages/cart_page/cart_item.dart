@@ -68,7 +68,7 @@ class CartItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text(item.goodsName),
-          CartCount()
+          CartCount(item),
         ],
       ),
     );
@@ -85,7 +85,7 @@ class CartItem extends StatelessWidget {
           Container(
             child: InkWell(
               onTap: (){
-                Provider.of<CartProvider>(context).deleteOneGoods(item.goodsId);
+                Provider.of<CartProvider>(context, listen: false).deleteOneGoods(item.goodsId);
               },
               child: Icon(
                 Icons.delete_forever,

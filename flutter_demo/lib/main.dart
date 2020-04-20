@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_demo/provider/category_detail_info.dart';
 
 import 'package:flutter_demo/provider/cart.dart';
+import 'package:flutter_demo/provider/currentIndex.dart';
 
 // Widget（小部件）
 // 有状态的 stateful
@@ -46,6 +47,7 @@ void main() {
           providers: [
             ChangeNotifierProvider<CartProvider>(create: (_)=>CartProvider()),
             ChangeNotifierProvider<DetailsInfoProvide>(create: (_)=>DetailsInfoProvide()),
+            ChangeNotifierProvider<CurrentIndexProvide>(create: (_)=>CurrentIndexProvide()),
           ],
           child: MyApp(),
       ),

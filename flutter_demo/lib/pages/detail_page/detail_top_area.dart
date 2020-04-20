@@ -14,7 +14,6 @@ class DetailTopArea extends StatelessWidget {
         padding: EdgeInsets.all(2.0),
         child: Consumer<DetailsInfoProvide>(
           builder: (BuildContext context, DetailsInfoProvide detailInfo, Widget child) {
-            print("zhusuhua ===== detailInfo = "+detailInfo.goodsInfo.toString());
 
             var goodsInfo = detailInfo.goodsInfo;
             if(goodsInfo != null) {

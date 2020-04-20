@@ -15,7 +15,6 @@ Future postRequest(url, {formData}) async {
     Response response;
     Dio dio = new Dio();
     dio.options.headers = httpHeaders;
-//    print("zhousuhua ---- "+url+formData);
     if(formData == null) {
       response = await dio.post(servicePath[url]);
     }else{

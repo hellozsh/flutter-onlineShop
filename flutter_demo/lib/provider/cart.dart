@@ -27,6 +27,8 @@ class CartProvider with ChangeNotifier{
       if(item['goodsId']==goodsId){
         tempList[ival]['count']=item['count']+1;
         cartList[ival].count++;
+        allPrice+=(1*price);
+        allGoodsCount+=1;
         isHave = true;
       }
       ival++;
@@ -43,6 +45,8 @@ class CartProvider with ChangeNotifier{
 
       allPrice+=(count*price);
       allGoodsCount+=count;
+
+      print("zhousuhua ------ "+allGoodsCount.toString());
 
       tempList.add(newGoods);
       cartList.add(CartInfoMode.fromJson(newGoods));

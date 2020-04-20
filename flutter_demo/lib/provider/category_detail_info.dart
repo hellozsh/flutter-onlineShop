@@ -18,7 +18,6 @@ class DetailsInfoProvide with ChangeNotifier{
 
       var responData = json.decode(val.toString());
       _goodsInfo = CategoryDetailRes.fromJson(responData);
-      print("zhousuhua - respon="+_goodsInfo.data.goodInfo.image1);
 
       notifyListeners();
     });

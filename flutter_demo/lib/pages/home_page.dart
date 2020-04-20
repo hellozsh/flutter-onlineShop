@@ -114,7 +114,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       List<Widget> listWidget = hotGoodsList.map((val) {
         return InkWell(
             onTap: () {
-              print('zhousuhua ============ ');
               Application.router.navigateTo(context, "/detail?id=");
             },
             child:

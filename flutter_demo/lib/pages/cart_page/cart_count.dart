@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_demo/provider/cart.dart';
+import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CartCount extends StatelessWidget {
+
+  var item;
+  CartCount(this.item);
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +21,35 @@ class CartCount extends StatelessWidget {
       child: Row(
         children: <Widget>[
 
-          _reduceBtn(),
-          _countArea(),
-          _addBtn(),
+          _reduceBtn(context),
+          _countArea(context),
+          _addBtn(context),
         ],
       ),
     );
   }
 
-  Widget _reduceBtn(){
+  Widget _reduceBtn(BuildContext context){
 
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        if(item.count == 1){
+
+          Fluttertoast.showToast(
+              msg: "不能再少啦",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+
+        }else{
+          item.count--;
+          Provider.of<CartProvider>(context, listen: false).changeInfoModel(item);
+        }
+      },
       child: Container(
         width: ScreenUtil().setWidth(45),
         height: ScreenUtil().setHeight(45),
@@ -43,10 +66,13 @@ class CartCount extends StatelessWidget {
     );
   }
   
-  Widget _addBtn(){
+  Widget _addBtn(BuildContext context){
     
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        item.count++;
+        Provider.of<CartProvider>(context, listen: false).changeInfoModel(item);
+      },
       child: Container(
         width: ScreenUtil().setWidth(45),
         height: ScreenUtil().setHeight(45),
@@ -63,14 +89,18 @@ class CartCount extends StatelessWidget {
     );
   }
   
-  Widget _countArea(){
+  Widget _countArea(BuildContext context){
     
-    return Container(
-      width: ScreenUtil().setWidth(70),
-      height: ScreenUtil().setHeight(45),
-      alignment: Alignment.center,
-      color: Colors.white,
-      child: Text('1'),
+    return Consumer(
+        builder: (BuildContext context, CartProvider provider, Widget child){
+          return Container(
+            width: ScreenUtil().setWidth(70),
+            height: ScreenUtil().setHeight(45),
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: Text('${item.count}'),
+          );
+        }
     );
   }
 }

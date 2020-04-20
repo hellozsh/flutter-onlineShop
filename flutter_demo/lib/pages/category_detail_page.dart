@@ -7,6 +7,7 @@ import 'package:flutter_demo/pages/detail_page/details_tabbar.dart';
 import 'package:flutter_demo/pages/detail_page/details_web.dart';
 import 'package:flutter_demo/pages/detail_page/detail_bottom.dart';
 
+
 class DetailPage extends StatelessWidget {
   
   final String goodsId;

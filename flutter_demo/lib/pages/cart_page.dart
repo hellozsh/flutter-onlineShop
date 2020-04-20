@@ -54,7 +54,6 @@ class CartPage extends StatelessWidget {
 
   Future<String> _getCartInfo(BuildContext context) async {
 
-    print('zhousuhua ===== cartList====');
     await Provider.of<CartProvider>(context, listen: false).getCartInfo();
     return 'end';
   }

@@ -132,11 +132,9 @@ class _leftCategoryNavState extends State<LeftCategoryNav> {
       'categorySubId': '',
       'page': 1
     };
-    print("zhousuhua ===="+data.toString());
     await postRequest('getMallGoods', formData: data).then((val){
 
       var responData = json.decode(val.toString());
-      print("zhousuhua ===="+responData.toString());
       CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(responData);
       if(goodsList.data == null) {
         Provide.value<CategoryGoodsListProvide>(context).getGoodsList([]);

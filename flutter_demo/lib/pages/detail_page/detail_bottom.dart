@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutter_demo/provider/cart.dart';
 import 'package:provider/provider.dart';
 
+
+import 'package:flutter_demo/provider/currentIndex.dart';
+
 class DetailBottom extends StatelessWidget {
 //  return Consumer<DetailsInfoProvide>(
 //  builder: (BuildContext context, DetailsInfoProvide detailInfo, Widget child) {
@@ -14,7 +17,7 @@ class DetailBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Consumer<DetailsInfoProvide>(
+    return Consumer(
         builder: (BuildContext context, DetailsInfoProvide detailInfo, Widget child) {
           return Container(
             width: ScreenUtil().setWidth(750),
@@ -22,8 +25,14 @@ class DetailBottom extends StatelessWidget {
             height: ScreenUtil().setHeight(80),
             child: Row(
               children: <Widget>[
+
+                Stack(
+              children: <Widget>[
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Provider.of<CurrentIndexProvide>(context,listen: false).changeIndex(2);
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     width: ScreenUtil().setWidth(110),
                     alignment: Alignment.center,
@@ -34,6 +43,38 @@ class DetailBottom extends StatelessWidget {
                     ),
                   ),
                 ),
+                Consumer(
+                    builder: (BuildContext context, CartProvider provide, Widget child){
+                      return Positioned(
+                        top: 0,
+                          right: 10,
+
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(6, 3, 6, 3),
+                            decoration: BoxDecoration(
+                              color: Colors.pink,
+                              border: Border.all(
+                                width: 2,
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Text(
+                              '${provide.allGoodsCount}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: ScreenUtil().setSp(22)
+                              ),
+                            ),
+                          )
+                      );
+                    }
+                )
+
+              ],
+            ),
+
+
                 InkWell(
                   onTap: (){
                     var goodInfo = detailInfo.goodsInfo.data.goodInfo;
@@ -55,7 +96,8 @@ class DetailBottom extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
-                    Provider.of<CartProvider>(context, listen: false).remove();
+                    Provider.of<CurrentIndexProvide>(context,listen: false).changeIndex(2);
+                    Navigator.pop(context);
                   },
                   child: Container(
                     width: ScreenUtil().setWidth(320),
