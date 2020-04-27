@@ -5,6 +5,7 @@ import 'home_page.dart';
 import 'cart_page.dart';
 import 'member_page.dart';
 import 'category_page.dart';
+import 'test_page.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -29,14 +30,19 @@ class IndexPage extends StatelessWidget {
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.profile_circled),
         title: Text("会员中心")
-    )
+    ),
+    BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.profile_circled),
+        title: Text("测试")
+    ),
   ];
 
   final List<Widget> tabBodies = [
     HomePage(),
     CategoryPage(),
     CartPage(),
-    MemberPage()
+    MemberPage(),
+    TestPage()
   ];
 
 //  int currentIndex = 0;
